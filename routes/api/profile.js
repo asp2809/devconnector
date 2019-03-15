@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
-
 const router = express.Router();
 
 // Load Profile Model
@@ -31,12 +30,13 @@ router.get(
     const errors = {};
     console.log(req.user.id);
     Profile.findOne({ user: req.user.id })
+      .populate("user", ["name", "avatar"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
-          return res.status(400).json(errors);
+          return res.status(404).json(errors);
         }
-        return res.json(profile);
+        res.json(profile);
       })
       .catch(err => res.status(404).json(err));
   }
@@ -81,7 +81,7 @@ router.post(
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
-    Profile.findOne({ user: req.body.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         // Update the profile
         Profile.findOneAndUpdate(

@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 //Creating Profile Schema
 const ProfileSchema = new Schema({
-  users: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "Users"
+    ref: "users"
   },
   handle: {
     type: String,
