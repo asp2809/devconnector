@@ -9,7 +9,6 @@ const profile = require("./routes/api/profile");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
-
 //DB Config
 const db = require("./config/keys").mongoURI;
 
