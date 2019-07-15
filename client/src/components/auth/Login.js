@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { loginUser } from "../../actions/authActions";
 
+import TextFieldGroup from "../common/TextFieldGroup";
+
 class Login extends Component {
   state = {
     email: "",
@@ -41,36 +43,22 @@ class Login extends Component {
                 Sign in to your DevConnector account
               </p>
               <form onSubmit={e => this.onSubmit(e)}>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.email
-                    })}
-                    placeholder="Email Address"
-                    name="email"
-                    value={this.state.email}
-                    onChange={e => this.onChange(e)}
-                  />
-                  {errors.email ? (
-                    <div className="invalid-feedback">{errors.email}</div>
-                  ) : null}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.password
-                    })}
-                    placeholder="Password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={e => this.onChange(e)}
-                  />
-                  {errors.password ? (
-                    <div className="invalid-feedback">{errors.password}</div>
-                  ) : null}
-                </div>
+                <TextFieldGroup
+                  type="email"
+                  placeholder="Email Address"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
+                />
+                <TextFieldGroup
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  error={errors.password}
+                />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
