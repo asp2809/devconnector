@@ -11,6 +11,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Dashboard from "./components/dashboard/Dashboard";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
@@ -46,6 +47,7 @@ class App extends Component {
               <Switch>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Route path="/dashboard" component={Dashboard} />
               </Switch>
             </div>
             <Footer />
