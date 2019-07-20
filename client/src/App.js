@@ -14,6 +14,8 @@ import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import PrivateRoute from "./components/common/PrivateRoute";
+import { clearCurrentProfile } from "./actions/profileActions";
 
 // Check for Token
 if (localStorage.jwtToken) {
@@ -29,7 +31,8 @@ if (localStorage.jwtToken) {
   if (decoded.eat < currentTime) {
     // Logout User
     store.dispatch(logoutUser());
-    //TODO: Clear Current Profile
+    //Clear Current Profile
+    store.dispatch(clearCurrentProfile);
     // Redirect to Login
     window.location.href = "/login";
   }
@@ -47,7 +50,7 @@ class App extends Component {
               <Switch>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
-                <Route path="/dashboard" component={Dashboard} />
+                <PrivateRoute path="/dashboard" component={Dashboard} />
               </Switch>
             </div>
             <Footer />
