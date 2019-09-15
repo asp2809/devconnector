@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
+import React from 'react';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
-const SelectListGroup = ({ error, name, value, onChange, info, options }) => {
-  const selectList = options.map(option => (
+const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
+  const selectOptions = options.map(option => (
     <option key={option.label} value={option.value}>
       {option.label}
     </option>
@@ -11,30 +11,28 @@ const SelectListGroup = ({ error, name, value, onChange, info, options }) => {
   return (
     <div className="form-group">
       <select
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": error
+        className={classnames('form-control form-control-lg', {
+          'is-invalid': error
         })}
         name={name}
         value={value}
-        onChange={e => onChange(e)}
+        onChange={onChange}
       >
-        {selectList}
+        {selectOptions}
       </select>
       {info && <small className="form-text text-muted">{info}</small>}
-      {error ? <div className="invalid-feedback">{error}</div> : null}
+      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };
 
 SelectListGroup.propTypes = {
-  error: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
+  info: PropTypes.string,
+  error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired
 };
-
-SelectListGroup.defaultProps = {};
 
 export default SelectListGroup;
